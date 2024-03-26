@@ -51,7 +51,7 @@ public class Test2_cardGame extends JFrame {
 		
 		JLabel lblNewLabel_6 = new JLabel("");
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_6.setIcon(new ImageIcon(Test2_cardGame.class.getResource("/t9_game/images/card2.jpg")));
+		lblNewLabel_6.setIcon(new ImageIcon(Test2_cardGame.class.getResource("/t9_game/images/card0.jpg")));
 		pn2.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_8 = new JLabel("");
@@ -79,27 +79,33 @@ public class Test2_cardGame extends JFrame {
 		lblNewLabel_14.setHorizontalAlignment(SwingConstants.CENTER);
 		pn2.add(lblNewLabel_14);
 		
-		JLabel lblNewLabel_7 = new JLabel("New label");
+		JLabel lblNewLabel_7 = new JLabel("");
+		lblNewLabel_7.setIcon(new ImageIcon(Test2_cardGame.class.getResource("/t9_game/images/card5.jpg")));
 		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
 		pn2.add(lblNewLabel_7);
 		
-		JLabel lblNewLabel_9 = new JLabel("New label");
+		JLabel lblNewLabel_9 = new JLabel("");
+		lblNewLabel_9.setIcon(new ImageIcon(Test2_cardGame.class.getResource("/t9_game/images/card5.jpg")));
 		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
 		pn2.add(lblNewLabel_9);
 		
-		JLabel lblNewLabel_18 = new JLabel("New label");
+		JLabel lblNewLabel_18 = new JLabel("");
+		lblNewLabel_18.setIcon(new ImageIcon(Test2_cardGame.class.getResource("/t9_game/images/card6.jpg")));
 		lblNewLabel_18.setHorizontalAlignment(SwingConstants.CENTER);
 		pn2.add(lblNewLabel_18);
 		
-		JLabel lblNewLabel_13 = new JLabel("New label");
+		JLabel lblNewLabel_13 = new JLabel("");
+		lblNewLabel_13.setIcon(new ImageIcon(Test2_cardGame.class.getResource("/t9_game/images/card6.jpg")));
 		lblNewLabel_13.setHorizontalAlignment(SwingConstants.CENTER);
 		pn2.add(lblNewLabel_13);
 		
-		JLabel lblNewLabel_15 = new JLabel("New label");
+		JLabel lblNewLabel_15 = new JLabel("");
+		lblNewLabel_15.setIcon(new ImageIcon(Test2_cardGame.class.getResource("/t9_game/images/card9.jpg")));
 		lblNewLabel_15.setHorizontalAlignment(SwingConstants.CENTER);
 		pn2.add(lblNewLabel_15);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(Test2_cardGame.class.getResource("/t9_game/images/card9.jpg")));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		pn2.add(lblNewLabel_2);
 		
