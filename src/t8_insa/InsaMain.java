@@ -3,6 +3,7 @@ package t8_insa;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.ImageIcon;
@@ -85,6 +86,16 @@ public class InsaMain extends JFrame {
 		//사원개별조회
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String name = JOptionPane.showInputDialog("검색할 성명을 입려하세요");
+				InsaDAO dao =  new InsaDAO();
+				InsaVO vo = dao.getNameSerch(name);
+				
+				if(vo.getName() == null) {
+					JOptionPane.showConfirmDialog(null, "검색한 회원이 없습니다.");
+				}else {
+					dispose();
+					new InsaSearch(vo);
+				}
 			}
 		});
 		

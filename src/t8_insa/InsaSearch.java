@@ -13,15 +13,19 @@ import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 
-public class InsaInput extends JFrame {
+@SuppressWarnings("serial")
+public class InsaSearch extends JFrame {
 	private JTextField txtName;
 	private JTextField txtAge;
 	private final ButtonGroup btnGroupGender = new ButtonGroup();
 	JRadioButton rdGenderMale, rdGenderFemale;
 	JButton btnInput, btnReset, btnClose;
+	@SuppressWarnings("rawtypes")
 	JComboBox cbYY, cbMM, cbDD;
 	
 	InsaDAO dao = new InsaDAO();
@@ -29,7 +33,7 @@ public class InsaInput extends JFrame {
 	int res = 0;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public InsaInput() {
+	public InsaSearch(InsaVO vo) {
 		super("회원가입");
 		setSize(800,600);
 		getContentPane().setLayout(null);
@@ -39,7 +43,7 @@ public class InsaInput extends JFrame {
 		getContentPane().add(pn1);
 		pn1.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("회원가입 Form");
+		JLabel lblNewLabel = new JLabel("회원 개별조회(수정/삭제)");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("경기천년제목V Bold", Font.BOLD, 25));
 		lblNewLabel.setBounds(0, 0, 760, 77);
@@ -74,7 +78,8 @@ public class InsaInput extends JFrame {
 		lblIpsail.setBounds(140, 286, 152, 41);
 		pn2.add(lblIpsail);
 		
-		txtName = new JTextField();
+		txtName = new JTextField("");
+		txtName.setEditable(false);
 		txtName.setHorizontalAlignment(SwingConstants.CENTER);
 		txtName.setFont(new Font("경기천년제목 Medium", Font.PLAIN, 18));
 		txtName.setBounds(281, 50, 230, 28);
@@ -82,6 +87,7 @@ public class InsaInput extends JFrame {
 		txtName.setColumns(10);
 		
 		txtAge = new JTextField();
+		txtAge.setEditable(false);
 		txtAge.setHorizontalAlignment(SwingConstants.CENTER);
 		txtAge.setFont(new Font("경기천년제목 Medium", Font.PLAIN, 18));
 		txtAge.setColumns(10);
@@ -106,6 +112,7 @@ public class InsaInput extends JFrame {
 		String[] mm = new String[12];
 		String[] dd = new String[31];
 
+		
 		int imsi = 0;
 		for(int i = 0; i<yy.length; i++) {
 			imsi = 2024 - i;
@@ -118,19 +125,28 @@ public class InsaInput extends JFrame {
 			dd[i] = (i+1)+"" ;
 		}
 		
+		//DB의 날짜 형식을 콤보상자의 날짜형식과 일치시켜서 비교하기 위한 작업
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-M-d");
+		LocalDate date = LocalDate.parse(vo.getIpsail().substring(0,10));
+		String strDate = date.format(dtf);
+		String[] ymds = strDate.split("-");
+		
 		cbYY = new JComboBox(yy);
 		cbYY.setFont(new Font("경기천년제목V Bold", Font.PLAIN, 20));
 		cbYY.setBounds(257, 286, 97, 28);
+		cbYY.setSelectedItem(ymds[0]);
 		pn2.add(cbYY);
 		
 		cbMM = new JComboBox(mm);
 		cbMM.setFont(new Font("경기천년제목V Bold", Font.PLAIN, 20));
 		cbMM.setBounds(379, 286, 73, 28);
+		cbMM.setSelectedItem(ymds[1]);
 		pn2.add(cbMM);
 		
 		cbDD = new JComboBox(dd);
 		cbDD.setFont(new Font("경기천년제목V Bold", Font.PLAIN, 20));
 		cbDD.setBounds(474, 286, 73, 28);
+		cbDD.setSelectedItem(ymds[2]);
 		pn2.add(cbDD);
 		
 		JLabel lblNewLabel_1 = new JLabel("년");
@@ -153,12 +169,12 @@ public class InsaInput extends JFrame {
 		getContentPane().add(pn3);
 		pn3.setLayout(null);
 		
-		btnInput = new JButton("가입하기");
+		btnInput = new JButton("수정하기");
 		btnInput.setFont(new Font("경기천년제목 Medium", Font.PLAIN, 18));
 		btnInput.setBounds(80, 25, 146, 42);
 		pn3.add(btnInput);
 		
-		btnReset = new JButton("다시입력");
+		btnReset = new JButton("삭제하기");
 		btnReset.setFont(new Font("경기천년제목 Medium", Font.PLAIN, 18));
 		btnReset.setBounds(306, 25, 146, 42);
 		pn3.add(btnReset);
@@ -167,6 +183,16 @@ public class InsaInput extends JFrame {
 		btnClose.setFont(new Font("경기천년제목 Medium", Font.PLAIN, 18));
 		btnClose.setBounds(532, 25, 146, 42);
 		pn3.add(btnClose);
+		
+		//vo에 담겨서 넘어온 회원의 정보를 검색창에 뿌려주도록 한다.
+		txtName.setText(vo.getName());
+		txtAge.setText(vo.getAge()+"");
+		if(vo.getGender().equals("남자"))rdGenderMale.setSelected(true);
+		if(vo.getGender().equals("여자"))rdGenderFemale.setSelected(true);
+		
+		
+		
+		
 		
 		// --------------------------위쪽은 UI------------------------------------
 		setLocationRelativeTo(null);
@@ -218,7 +244,7 @@ public class InsaInput extends JFrame {
 //						}
 //						else {
 //							JOptionPane.showMessageDialog(null, "회원 가입 실패~~  다시 가입해 주세요");
-//							txtName.requestFocus();
+////							txtName.requestFocus();
 //						}
 //					}
 				}
