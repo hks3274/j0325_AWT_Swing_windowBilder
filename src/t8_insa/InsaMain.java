@@ -9,6 +9,8 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
@@ -74,8 +76,17 @@ public class InsaMain extends JFrame {
 		setVisible(true);
 		// --------------------------아래쪽은 메소드-----------------------------------
 		
+	//사원등록 버튼을 키보드엔터키로 등록시 수행
+			btnInput.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					dispose();
+					new InsaInput();
+				}
+			});
 		
-		//사원등록
+		
+		//사원등록버튼을 마우스로 클릭시 수행
 		btnInput.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -83,7 +94,25 @@ public class InsaMain extends JFrame {
 			}
 		});
 		
-		//사원개별조회
+		//사원개별조회 키보드
+			btnSearch.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					String name = JOptionPane.showInputDialog("검색할 성명을 입려하세요");
+					InsaDAO dao =  new InsaDAO();
+					InsaVO vo = dao.getNameSerch(name);
+					
+					if(vo.getName() == null) {
+						JOptionPane.showConfirmDialog(null, "검색한 회원이 없습니다.");
+					}else {
+						dispose();
+						new InsaSearch(vo);
+					}
+				}
+			});
+		
+		
+		//사원개별조회 마우스
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String name = JOptionPane.showInputDialog("검색할 성명을 입려하세요");
@@ -102,10 +131,22 @@ public class InsaMain extends JFrame {
 		//전체조회
 		btnList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new InsaList();
 			}
 		});
 		
-		//종료
+		
+		//종료 키보드 엔터키 처리시 수행
+			btnExit.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					System.exit(0);
+				}
+			});
+		
+		
+		//종료 마우스 클릭시 수행
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);

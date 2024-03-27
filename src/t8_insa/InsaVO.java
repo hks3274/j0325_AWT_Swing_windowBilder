@@ -6,6 +6,9 @@ public class InsaVO {
 	private int age;
 	private String gender;
 	private String ipsail;
+	private String cbYY;
+	private String cbMM;
+	private String cbDD;
 	
 	
 	public int getIdx() {
@@ -38,12 +41,33 @@ public class InsaVO {
 	public void setIpsail(String ipsail) {
 		this.ipsail = ipsail;
 	}
-	
+	public String getCbYY() {
+		return cbYY;
+	}
+	public void setCbYY(String cbYY) {
+		this.cbYY = cbYY;
+	}
+	public String getCbMM() {
+		return cbMM;
+	}
+	public void setCbMM(String cbMM) {
+		this.cbMM = cbMM;
+	}
+	public String getCbDD() {
+		return cbDD;
+	}
+	public void setCbDD(String cbDD) {
+		this.cbDD = cbDD;
+	}
 	
 	@Override
 	public String toString() {
-		return "insaVO [idx=" + idx + ", name=" + name + ", age=" + age + ", gender=" + gender + ", ipsail=" + ipsail + "]";
+		return "InsaVO [idx=" + idx + ", name=" + name + ", age=" + age + ", gender=" + gender + ", ipsail=" + ipsail
+				+ ", cbYY=" + cbYY + ", cbMM=" + cbMM + ", cbDD=" + cbDD + "]";
 	}
+
+	
+	
 	
 	
 }
